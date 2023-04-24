@@ -1,129 +1,174 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import BaseApp from '../sidenavbar/sidebar';
 import { AppState } from '../provider/provider';
+import * as yup from 'yup'
+import { Button, TextField } from "@mui/material";
+import { useFormik } from "formik";
+import { toast } from 'react-toastify';
+
+const userSchemaValidation = yup.object({
+  id: yup.string().required("please specify Book ID"),
+  mobileName: yup.string().required("Please fill in your Mobile Name"),
+  image: yup.string().required("please write proper image sorce"),
+  model: yup.string().required("Please enter model"),
+  price: yup.string().required("Please enter price."),
+  Ram: yup.string().required("Please enter Ram."),
+  storage: yup.string().required("Please enter storage.")
+
+})
 
 
 const EditMobile = () => {
   const { mobile, setMobile } = AppState();
-  const [mobileName, setMobileName] = useState("");
-  const [idx, setIdx] = useState("");
-  const [image, setImage] = useState("");
-  const [model, setModel] = useState("");
-  const [price, setPrice] = useState("");
-  const [Ram, setRam] = useState("");
-  const [storage, setStorage] = useState("");
-
   const { id } = useParams();
   const history = useHistory()
   const selectedmobile = mobile.find((mob) => mob.id === id);
 
-  useEffect(() => {
-    setIdx(selectedmobile.id)
-    setMobileName(selectedmobile.mobileName)
-    setImage(selectedmobile.image)
-    setModel(selectedmobile.model)
-    setPrice(selectedmobile.price)
-    setRam(selectedmobile.Ram)
-    setStorage(selectedmobile.storage)
-
-  }, []);
-
   //
-  const updateMobile = async () => {
+  const updateMobile = async ({ editedMobile }) => {
     // step 1 : collecting new data
     const editIndex = mobile.findIndex(per => per.id === id)
     //chaged data in the input field
-    const editedmobileData = {
-      id: idx,
-      mobileName,
-      image,
-      model,
-      price,
-      Ram,
-      storage
+
+    try {
+      const response = await fetch(`https://mobile-back.onrender.com/mobile/edit/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(editedMobile),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      const data = await response.json();
+      let newDate = data.mobile;
+
+      mobile[editIndex] = newDate;
+      setMobile([...mobile]);
+      history.push("/");
+      toast("Mobile Data Edited")
+    } catch (error) {
+      console.log(error)
+      toast("error")
     }
-    // try {
-    //   const response = await fetch(`https://mobile-back.onrender.com/mobile/edit/${id}`, {
-    //     method: "PUT",
-    //     body: JSON.stringify(editedmobileData),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   const data = await response.json();
-    //   console.log(data);
-
-    //   mobile[editIndex] = data;
-    //   setMobile([...mobile]);
-    //   history.push("/");
-
-    // } catch (error) {
-    //   console.log(error)
-    // }
-    mobile[editIndex] = editedmobileData;
-    setMobile([...mobile]);
-     history.push("/");
   }
-  
+  const { values, handleChange, handleSubmit, handleBlur, errors, touched } = useFormik({
+    initialValues: {
+      id: selectedmobile.id,
+      mobileName: selectedmobile.mobileName,
+      image: selectedmobile.image,
+      model: selectedmobile.model,
+      price: selectedmobile.price,
+      Ram: selectedmobile.Ram,
+      storage: selectedmobile.storage
+    },
+    validationSchema: userSchemaValidation,
+    onSubmit: (editedMobile) => {
+      console.log("on submit called :", editedMobile)
+      updateMobile({ editedMobile });
+
+    }
+
+  })
+
 
 
   return (
     <BaseApp
       title={"Edit the Mobile details"}
     >
-      <div className="add-continar">
-        <div className="add-card">
-          <ul type="none">
-            <li><input
-              placeholder="id"
-              value={idx}
-              onChange={(event) => setIdx(event.target.value)}
-            /></li>
+      <div className='issued-container'>
 
-            <li><input
-              placeholder="mobileName"
-              value={mobileName}
-              onChange={(event) => setMobileName(event.target.value)}
-            /></li>
+        <form onSubmit={handleSubmit} className="text-areas">
+          <TextField
+            fullWidth
+            id="fullWidth"
+            name="id"
+            onBlur={handleBlur}
+            label="ID"
+            variant="outlined"
+            value={values.id}
+            onChange={handleChange}
+          />
+          {touched.id && errors.id ? <p style={{ color: "crimson" }}>{errors.id}</p> : ""}
+          <TextField
+            fullWidth
+            id="fullWidth"
+            label="mobile Name"
+            variant="outlined"
+            onBlur={handleBlur}
+            name="mobileName"
+            value={values.mobileName}
+            onChange={handleChange}
+          />
+          {touched.mobileName && errors.mobileName ? <p style={{ color: "crimson" }}>{errors.mobileName}</p> : ""}
 
-            <li><input
-              placeholder="image"
-              value={image}
-              onChange={(event) => setImage(event.target.value)}
-            /></li>
+          <TextField
+            fullWidth
+            id="fullWidth"
+            label="image Sorce"
+            variant="outlined"
+            onBlur={handleBlur}
+            name="image"
+            value={values.image}
+            onChange={handleChange}
+          />
+          {touched.image && errors.image ? <p style={{ color: "crimson" }}>{errors.image}</p> : ""}
 
-            <li><input
-              placeholder=" model"
-              value={model}
-              onChange={(event) => setModel(event.target.value)}
-            /></li>
+          <TextField
+            fullWidth
+            id="fullWidth"
+            label="model"
+            variant="outlined"
+            onBlur={handleBlur}
+            name="model"
+            value={values.model}
+            onChange={handleChange}
+          />
+          {touched.model && errors.model ? <p style={{ color: "crimson" }}>{errors.model}</p> : ""}
+          <TextField
+            fullWidth
+            id="fullWidth"
+            label="price"
+            variant="outlined"
+            onBlur={handleBlur}
+            name="price"
+            value={values.price}
+            onChange={handleChange}
+          />
+          {touched.price && errors.price ? <p style={{ color: "crimson" }}>{errors.price}</p> : ""}
+          <TextField
+            fullWidth
+            id="fullWidth"
+            label="Ram"
+            variant="outlined"
+            onBlur={handleBlur}
+            name="Ram"
+            value={values.Ram}
+            onChange={handleChange}
+          />
+          {touched.Ram && errors.Ram ? <p style={{ color: "crimson" }}>{errors.Ram}</p> : ""}
+          <TextField
+            fullWidth
+            id="fullWidth"
+            label="storage"
+            variant="outlined"
+            onBlur={handleBlur}
+            name="storage"
+            value={values.storage}
+            onChange={handleChange}
+          />
+          {touched.storage && errors.storage ? <p style={{ color: "crimson" }}>{errors.storage}</p> : ""}
 
-            <li><input
-              placeholder="price"
-              value={price}
-              onChange={(event) => setPrice(event.target.value)}
-            /></li>
-            <li><input
-              placeholder="Ram"
-              value={Ram}
-              onChange={(event) => setRam(event.target.value)}
-            /></li>
-
-            <li><input
-              placeholder="storage"
-              value={storage}
-              onChange={(event) => setStorage(event.target.value)}
-            /></li>
-
-            <li>  <button
-              onClick={updateMobile}
-            >Edit Mobile Details</button>
-            </li>
-          </ul>
-
-        </div>
+          <Button
+            variant="contained"
+            type="submit"
+            color="success"
+          >
+            Edited Mobile
+          </Button>
+        </form>
       </div>
+
     </BaseApp>
   )
 }

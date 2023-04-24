@@ -22,9 +22,10 @@ export function MobileDetails() {
                     <p>price : RS {mobiles.price}</p>
                     <p>Ram : {mobiles.Ram}Gb</p>
                     <p>storage : {mobiles.storage}Gb</p>
+                    <p>id:{mobiles.id}</p>
                     <p><button className="btn view-btn"
                         onClick={() => history.push("/")}>
-                        Home</button></p>
+                        Dashboard</button></p>
                 </div>
             </div>
         </BaseApp>

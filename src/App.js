@@ -6,24 +6,24 @@ import EditMobile from './mobile/EditMobileDetail'
 import { MobileDetails } from './mobile/mobieDetails.';
 import { Nopage } from './mobile/NoPage';
 import { AddMobiles } from './mobile/addmobile';
-import { Rag } from './r';
+
 
 
 
 
 
 function App() {
-  
+
   return (
     <div className="App">
 
       <Switch>
         <Route exact path="/">
-          <UserComponent/>
+          <UserComponent />
         </Route>
 
         <Route path="/addmobile">
-      <AddMobiles/>
+          <AddMobiles />
         </Route>
 
         <Route path="/mobile/edit/:id">
@@ -32,11 +32,11 @@ function App() {
 
 
         <Route path="/mobile/:id">
-         <MobileDetails/>
+          <MobileDetails />
         </Route>
 
         <Route path="**">
-          <Nopage/>
+          <Nopage />
         </Route>
       </Switch>
 

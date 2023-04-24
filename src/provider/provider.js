@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-//import { data } from "../Data/data";
+
+
 const AppContext = createContext();
-const Appprovider = ( {children}) => {
+const Appprovider = ({ children }) => {
     const [mobile, setMobile] = useState([]);
-   
+
     useEffect(() => {
         const getDetails = async () => {
             try {
@@ -13,7 +14,6 @@ const Appprovider = ( {children}) => {
                 const data = await response.json();
                 let setdata = data.mobile
                 setMobile(setdata);
-                console.log(setdata);
             } catch (error) {
                 console.log(error);
             }
