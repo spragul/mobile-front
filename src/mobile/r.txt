@@ -1,0 +1,208 @@
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import BaseApp from '../sidenavbar/sidebar';
+
+const userSchemaValidation = yup.object({
+    id: yup.string().required("please specify mobile ID"),
+    name: yup.string().required("Please fill in your Mobile Name"),
+    image: yup.string().required("please write proper image sorce"),
+    model: yup.string().required("please write proper model"),
+    price: yup.string().required("please write proper price"),
+    Ram: yup.string().required("please write proper Ram size"),
+    storage: yup.string().required("please write storage"),
+})
+
+
+export function AddMobile({ mobile, setMobile }) {
+    const history = useHistory();
+    //defining states
+    const [mobileName, setMobileName] = useState("");
+    const [id, setId] = useState("");
+    const [image, setImage] = useState("");
+    const [model, setModel] = useState();
+    const [price, setPrice] = useState("");
+    const [Ram, setRam] = useState("");
+    const [storage, setStorage] = useState("");
+
+    const { values, handleChange, handleSubmit, handleBlur, errors, touched } = useFormik({
+        initialValues: {
+            id: "",
+            name: "",
+            image: "",
+            Author: "",
+            description: "",
+        },
+        validationSchema: userSchemaValidation,
+        onSubmit: (newBook) => {
+            console.log("on submit called :", newBook)
+            addNewBook({ newBook });
+
+        }
+
+    })
+
+    const addNewMobile = () => {
+        const newmobile = {
+            id,
+            mobileName,
+            image,
+            model,
+            price,
+            Ram,
+            storage
+        }
+        console.log(newmobile)
+        setMobile([...mobile, newmobile])
+        history.push("/")
+    }
+
+    return (
+        <BaseApp
+            title={"Add A New Mobile"}
+        >
+            <div className='issued-container'>
+
+                <form onSubmit={handleSubmit} className="text-areas">
+                    <TextField
+                        fullWidth
+                        id="fullWidth"
+                        name="id"
+                        onBlur={handleBlur}
+                        label="ID"
+                        variant="outlined"
+                        value={values.id}
+                        onChange={handleChange}
+                    />
+                    {touched.id && errors.id ? <p style={{ color: "crimson" }}>{errors.id}</p> : ""}
+                    <TextField
+                        fullWidth
+                        id="fullWidth"
+                        label="mobileName"
+                        variant="outlined"
+                        onBlur={handleBlur}
+                        name="mobileName"
+                        value={values.mobileName}
+                        onChange={handleChange}
+                    />
+                    {touched.mobileName && errors.mobileName ? <p style={{ color: "crimson" }}>{errors.mobileName}</p> : ""}
+
+                    <TextField
+                        fullWidth
+                        id="fullWidth"
+                        label="image Sorce"
+                        variant="outlined"
+                        onBlur={handleBlur}
+                        name="image"
+                        value={values.image}
+                        onChange={handleChange}
+                    />
+                    {touched.image && errors.image ? <p style={{ color: "crimson" }}>{errors.image}</p> : ""}
+
+                    <TextField
+                        fullWidth
+                        id="fullWidth"
+                        label="model"
+                        variant="outlined"
+                        onBlur={handleBlur}
+                        name="model"
+                        value={values.model}
+                        onChange={handleChange}
+                    />
+                    {touched.model && errors.model ? <p style={{ color: "crimson" }}>{errors.model}</p> : ""}
+                    <TextField
+                        fullWidth
+                        id="fullWidth"
+                        label="price"
+                        variant="outlined"
+                        onBlur={handleBlur}
+                        name="price"
+                        value={values.price}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        fullWidth
+                        id="fullWidth"
+                        label="Ram"
+                        variant="outlined"
+                        onBlur={handleBlur}
+                        name="Ram"
+                        value={values.Ram}
+                        onChange={handleChange}
+                    />
+                    {touched.Ram && errors.Ram ? <p style={{ color: "crimson" }}>{errors.Ram}</p> : ""}
+                    <TextField
+                        fullWidth
+                        id="fullWidth"
+                        label="storage"
+                        variant="outlined"
+                        onBlur={handleBlur}
+                        name="storage"
+                        value={values.storage}
+                        onChange={handleChange}
+                    />
+                    {touched.storage && errors.storage ? <p style={{ color: "crimson" }}>{errors.storage}</p> : ""}
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        color="success"
+                    >
+                        Add Book
+                    </Button>
+                </form>
+            </div>
+
+            {/* <div className="add-continar">
+                <div className="add-card">
+                    <ul type="none">
+                        <li><input
+                            placeholder="id"
+                            value={id}
+                            onChange={(event) => setId(event.target.value)}
+                        /></li>
+
+                        <li><input
+                            placeholder="mobileName"
+                            value={mobileName}
+                            onChange={(event) => setMobileName(event.target.value)}
+                        /></li>
+
+                        <li><input
+                            placeholder="image"
+                            value={image}
+                            onChange={(event) => setImage(event.target.value)}
+                        /></li>
+
+                        <li><input
+                            placeholder=" model"
+                            value={model}
+                            onChange={(event) => setModel(event.target.value)}
+                        /></li>
+
+                        <li><input
+                            placeholder="price"
+                            value={price}
+                            onChange={(event) => setPrice(event.target.value)}
+                        /></li>
+                        <li><input
+                            placeholder="Ram"
+                            value={Ram}
+                            onChange={(event) => setRam(event.target.value)}
+                        /></li>
+
+                        <li><input
+                            placeholder="storage"
+                            value={storage}
+                            onChange={(event) => setStorage(event.target.value)}
+                        /></li>
+
+                        <li> <button
+                            className="btn add-btn"
+                            onClick={addNewMobile}
+                        >Add New Mobile</button>
+                        </li>
+                    </ul>
+                </div>
+            </div> */}
+        </BaseApp>
+    )
+}

@@ -1,23 +1,46 @@
-import logo from './logo.svg';
+import { Route } from 'react-router-dom';
 import './App.css';
+import { Switch } from 'react-router-dom';
+import UserComponent from './mobile/UserComponent';
+import EditMobile from './mobile/EditMobileDetail'
+import { MobileDetails } from './mobile/mobieDetails.';
+import { Nopage } from './mobile/NoPage';
+import { AddMobiles } from './mobile/addmobile';
+import { Rag } from './r';
+
+
+
+
 
 function App() {
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <Switch>
+        <Route exact path="/">
+          <UserComponent/>
+        </Route>
+
+        <Route path="/addmobile">
+      <AddMobiles/>
+        </Route>
+
+        <Route path="/mobile/edit/:id">
+          <EditMobile />
+        </Route>
+
+
+        <Route path="/mobile/:id">
+         <MobileDetails/>
+        </Route>
+
+        <Route path="**">
+          <Nopage/>
+        </Route>
+      </Switch>
+
+
     </div>
   );
 }

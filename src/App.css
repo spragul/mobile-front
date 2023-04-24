@@ -1,38 +1,142 @@
 .App {
   text-align: center;
+  opacity: 1;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title {
+padding : 12px;
+font-size : 25px;
+font-weight: bolder;
+font-style:normal;
+font-family :Arial, Helvetica, sans-serif;
+background-color: rgb(209, 128, 23);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav-styles{
+  padding : 12px;
+  width : 100%;
+  background-color: grey;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: flex-start;
+  gap :0.5rem;
+}
+.nav-buttons{
+  border: 1px solid white;
   color: white;
+  padding : 12px;
+  border-radius : 5px;
+  background-color: inherit;
+}
+.nav-buttons:hover{
+  background-color: black;
+  border: none;
+}
+.view-btn:hover{
+ background-color: rgb(21, 118, 163);
+ color : white;
 }
 
-.App-link {
-  color: #61dafb;
+footer{
+
+  padding: 17px;
+  font-size: larger;
+  font-weight: bolder;
+  width : 100%;
+  background-color: grey;
+}
+.mobile-content{
+margin : 18px;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+gap: 1rem;
+
+}
+.mobile-card{
+  background-color: yellowgreen;
+  border-radius : 5px;
+  width : 250px;
+  height : auto
+}
+.btn{
+  padding: 10px;
+  margin : 5px;
+  border : none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size : 12px;
+}
+.edit-btn:hover{
+  background-color: blueviolet;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.del-btn:hover{
+  background-color: crimson;
+  color : white;
+ }
+ .add-btn:hover{
+   background-color: turquoise;
+   color: green;
+ }
+ .childred{
+  height : 90vh;
+  margin : 1vh;
+  display : flex;
+  flex-direction: column;
+  justify-content: space-between;
+ 
+ }
+ .dashboard{
+  display: flex;
+  flex-direction: coloumn;
+
+ }
+ .side-bar{
+  border: 1px solid red;
+  height:  100vh;
+  width : 15%;
+  background-color:  blue;
+ }
+
+ .main-content{
+  background-color: red;
+  height: 100vh;
+  width : 85%;
+ }
+ .bg-green{
+   background-color: rgb(255, 47, 220);
+   width: 40%;
+   height: 60%;
+ }
+ .nopage-font{
+   font-size: xx-large;
+   font-weight: 400;
+   color: red;
+ }
+ .bg-worm{
+   background-color: rgb(211, 134, 211);
+ }
+ .add-continar{
+   display: flex;
+   justify-content: center;
+   text-align: center;
+   width: 100%;
+   height: 100%;
+
+ }
+ .add-card{
+   background-color: blueviolet;
+   padding: 5px;
+   margin: 5px;
+   width: 70%;
+   height: 70%;
+ }
+ .image-size{
+   width: 230px;
+   height: 220px;
+
+ }
+ li input{
+   width: 60%;
+   height: 50%;
+   gap: 20px;
+ }
