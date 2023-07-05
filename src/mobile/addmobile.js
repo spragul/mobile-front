@@ -6,6 +6,7 @@ import * as yup from 'yup'
 import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
+import { url } from "../App";
 
 const userSchemaValidation = yup.object({
   id: yup.string().required("please specify Book ID"),
@@ -22,25 +23,26 @@ const userSchemaValidation = yup.object({
 export function AddMobiles() {
   const { mobile, setMobile } = AppState();
   const history = useHistory()
-
+  const token = sessionStorage.getItem('token')
   const addNewMobile = async ({ newMobile }) => {
     try {
-      const response = await fetch("https://mobile-back.onrender.com/addmobile", {
+      const response = await fetch(`${url}/addmobile`, {
         method: "POST",
         body: JSON.stringify(newMobile),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
       })
       const data = await response.json();
-      let waitingdata= await data;
+      let waitingdata = await data;
       console.log(waitingdata);
-      const mobileid =waitingdata.id;
-      if(mobileid==undefined){
-          toast("invaide ID");
-      }else{
+      const mobileid = waitingdata.id;
+      if (mobileid == undefined) {
+        toast("invaide ID");
+      } else {
         setMobile([...mobile, waitingdata])
-        history.push("/")
+        history.push("/dashboard")
         toast("Mobile Data Add")
       }
     } catch (error) {

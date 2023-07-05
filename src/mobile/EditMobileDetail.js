@@ -6,6 +6,7 @@ import * as yup from 'yup'
 import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { toast } from 'react-toastify';
+import { url } from '../App';
 
 const userSchemaValidation = yup.object({
   id: yup.string().required("please specify Book ID"),
@@ -24,7 +25,7 @@ const EditMobile = () => {
   const { id } = useParams();
   const history = useHistory()
   const selectedmobile = mobile.find((mob) => mob.id === id);
-
+  const token = sessionStorage.getItem('token');
   //
   const updateMobile = async ({ editedMobile }) => {
     // step 1 : collecting new data
@@ -32,19 +33,21 @@ const EditMobile = () => {
     //chaged data in the input field
 
     try {
-      const response = await fetch(`https://mobile-back.onrender.com/mobile/edit/${id}`, {
+      const response = await fetch(`${url}/mobile/edit/${id}`, {
         method: "PUT",
         body: JSON.stringify(editedMobile),
         headers: {
           "Content-Type": "application/json",
+          Authorization:`Bearer ${token}`
         },
+      
       })
       const data = await response.json();
       let newDate = data.mobile;
 
       mobile[editIndex] = newDate;
       setMobile([...mobile]);
-      history.push("/");
+      history.push("/dashboard");
       toast("Mobile Data Edited")
     } catch (error) {
       console.log(error)

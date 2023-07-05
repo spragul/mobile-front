@@ -23,8 +23,8 @@ export function MobileDetails() {
                     <p>Ram : {mobiles.Ram}Gb</p>
                     <p>storage : {mobiles.storage}Gb</p>
                     <p>id:{mobiles.id}</p>
-                    <p><button className="btn view-btn"
-                        onClick={() => history.push("/")}>
+                    <p><button id="view-btn" className="btn"
+                        onClick={() => history.push("/dashboard")}>
                         Dashboard</button></p>
                 </div>
             </div>

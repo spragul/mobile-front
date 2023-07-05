@@ -34,7 +34,7 @@
   border: none;
 }
 
-.view-btn:hover {
+#view-btn:hover {
   background-color: rgb(21, 118, 163);
   color: white;
 }
@@ -45,7 +45,7 @@ footer {
   font-size: larger;
   font-weight: bolder;
   width: 100%;
-  background-color: grey;
+  color: black;
 }
 
 .mobile-content {
@@ -61,7 +61,8 @@ footer {
   background-color: yellowgreen;
   border-radius: 5px;
   width: 250px;
-  height: auto
+  height: auto;
+  box-shadow: #d335fb 0px 0px 30px;
 }
 
 .btn {
@@ -73,11 +74,10 @@ footer {
   font-size: 12px;
 }
 
-.edit-btn:hover {
+#edit-btn:hover {
   background-color: blueviolet;
 }
-
-.del-btn:hover {
+#del-btn:hover {
   background-color: crimson;
   color: white;
 }
@@ -175,4 +175,65 @@ li input {
   flex-direction: column;
   gap: 0.5rem;
   margin: 12px;
+}
+
+/* login */
+#loginpageImage{
+  background-image: url(../src/pages//png/log.jpg);
+  background-color: #cccccc;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+/*  */
+
+/* signup */
+#signpageImage{
+  background-image: url(../src/pages/png/sign.jpg);
+  background-color: #cccccc;
+  height: 120vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+/* forgot */
+#forgotpageImage{
+  background-image: url(../src/pages/png/f.avif);
+  background-color: #cccccc;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+/* resetpassword */
+#resetpageImage{
+  background-image: url(../src/pages/png/resetpassword.avif);
+  background-color: #cccccc;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+#nav-btn-clr{
+  background-color: aqua;
+  color: black;
+}
+#nav-btn-clr:hover{
+  background-color: blueviolet;
+  color: #cccccc;
+}
+
+#firstpage{
+  background-image: url(../src/pages/png/f.jpeg);
+  background-color: #cccccc;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }

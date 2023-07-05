@@ -1,15 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-
-
+import { url } from "../App";
+const token = sessionStorage.getItem('token');
 const AppContext = createContext();
 const Appprovider = ({ children }) => {
     const [mobile, setMobile] = useState([]);
-
     useEffect(() => {
-        const getDetails = async () => {
+        const getDetails = async (token) => {
             try {
-                const response = await fetch("https://mobile-back.onrender.com", {
-                    method: "GET"
+                const response = await fetch(`${url}`, {
+                    method: "GET",
+                    headers:{Authorization:`Bearer ${token}`}
                 });
                 const data = await response.json();
                 let setdata = data.mobile
@@ -18,7 +18,7 @@ const Appprovider = ({ children }) => {
                 console.log(error);
             }
         }
-        getDetails();
+        getDetails(token);
     }, [])
 
 
