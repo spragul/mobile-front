@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { url } from "../App";
-const token = sessionStorage.getItem('token');
+
 const AppContext = createContext();
 const Appprovider = ({ children }) => {
     const [mobile, setMobile] = useState([]);
     const [loadingscreen,setLoadingscreen]=useState("true")
     useEffect(() => {
+        const token = sessionStorage.getItem('token');
         const getDetails = async (token) => {
             try {
                 const response = await fetch(`${url}`, {
