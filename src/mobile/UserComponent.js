@@ -6,9 +6,11 @@ import { toast } from "react-toastify";
 import { url } from "../App";
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import Loadings, { Loading } from "../Loading/loader";
+
 
 export default function UserComponent() {
-  const { mobile, setMobile } = AppState();
+  const { mobile, setMobile,loadingscreen } = AppState();
   const history = useHistory();
   const token =sessionStorage.getItem('token');
   //Delet functionality 
@@ -35,7 +37,8 @@ export default function UserComponent() {
     <BaseApp
       title="Ragul Mobile Shop">
       <div className="mobile-content">
-        {mobile.map((mobiles, idx) => (
+    {loadingscreen==="true" ? (<Loadings/>):
+      (<>  {mobile.map((mobiles, idx) => (
           <div key={idx} className="mobile-card">
             <h1>{mobiles.mobileName}</h1>
             <img src={mobiles.image} className="image-size"></img>
@@ -44,26 +47,6 @@ export default function UserComponent() {
             <p>Ram : {mobiles.Ram}Gb</p>
             <p>storage : {mobiles.storage}Gb</p>
 
-
-            {/* <div className="btn-group">
-
-              <button
-                onClick={() => history.push(`/mobile/edit/${mobiles.id}`)}
-                className="btn edit-btn">
-                Edit Mobile</button>
-
-              <button
-                className="btn view-btn"
-                onClick={() => history.push(`/mobile/${idx}`)}
-              >View Mobile</button>
-
-              <button
-                className="btn del-btn"
-                onClick={() => deletemobile(mobiles.id)}
-              >Delete Mobile</button>
-
-
-            </div> */}
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
               <Button id="edit-btn" onClick={() => history.push(`/mobile/edit/${mobiles.id}`)}> Edit</Button>
               <Button id="view-btn" onClick={() => history.push(`/mobile/${idx}`)}>View </Button>
@@ -71,6 +54,7 @@ export default function UserComponent() {
             </ButtonGroup>
           </div>
         ))}
+        </>)}
       </div>
     </BaseApp>
   )

@@ -4,6 +4,7 @@ const token = sessionStorage.getItem('token');
 const AppContext = createContext();
 const Appprovider = ({ children }) => {
     const [mobile, setMobile] = useState([]);
+    const [loadingscreen,setLoadingscreen]=useState("true")
     useEffect(() => {
         const getDetails = async (token) => {
             try {
@@ -14,6 +15,7 @@ const Appprovider = ({ children }) => {
                 const data = await response.json();
                 let setdata = data.mobile
                 setMobile(setdata);
+                setLoadingscreen("false");
             } catch (error) {
                 console.log(error);
             }
@@ -26,7 +28,9 @@ const Appprovider = ({ children }) => {
         <AppContext.Provider
             value={{
                 mobile,
-                setMobile
+                setMobile,
+                loadingscreen,
+                setLoadingscreen
             }}>
             {children}
         </AppContext.Provider>
