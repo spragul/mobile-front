@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import * as yup from 'yup'
 import { url } from '../App';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const userSchemaValidation = yup.object({
   email: yup.string().required("Please fill in your Email"),
@@ -77,7 +78,7 @@ export function Forgot() {
                 size='lg'
               >Reset Password link</MDBBtn>
               <div>
-                <a className='text-white' href="/login">Already have an account? Login!</a>
+                <Link to='/login' className='text-white'>Already have an account? Login!</Link>
               </div>
             </form>
           </MDBCardBody>

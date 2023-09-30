@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import * as yup from 'yup'
 import { url } from '../App';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 
 const userSchemaValidation = yup.object({
@@ -50,8 +51,8 @@ export function Login() {
   }
   const { values, handleChange, handleSubmit, handleBlur, errors, touched } = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'user123@gmail.com',
+      password: 'user1234',
     },
     validationSchema: userSchemaValidation,
     onSubmit: (loginuser) => {
@@ -102,7 +103,7 @@ export function Login() {
                {touched.password && errors.password ? <p style={{ color: "crimson" }}>{errors.password}</p> : ""}
           
               <div>
-               <p className="mb-0"><a style={{color:'white'}} href="/forgotpassword">Forgot password?</a></p>
+               <p className="mb-0"><Link to='/forgotpassword'  style={{color:'white'}}>Forgot password?</Link></p>
                </div>
               <MDBBtn 
               outline 
@@ -115,10 +116,8 @@ export function Login() {
               </MDBBtn>
           </form>
           </div>
-
-
               <div>
-                <p className="mb-0 text-white">Don't have an account? <a href="/signup" class="text-white-50 fw-bold">Sign Up</a></p>
+                <p className="mb-0 text-white">Don't have an account?  <Link to='/signup'  style={{color:'white'}}>Sign Up</Link></p>
 
               </div>
             </MDBCardBody>
@@ -131,6 +130,3 @@ export function Login() {
     </div>
   );
 }
-
-
-

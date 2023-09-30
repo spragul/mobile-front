@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import * as yup from 'yup'
 import { url } from '../App';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 
 const userSchemaValidation = yup.object({
@@ -126,7 +127,7 @@ export function Signup() {
               </form>
               <hr></hr>
               <div>
-                <a style={{color:"white"}} href="/login">Already have an account? Login!</a>
+                <Link to='/login' style={{color:"white"}}>Already have an account? Login!</Link>
               </div>
             </MDBCardBody>
           </MDBCard>
